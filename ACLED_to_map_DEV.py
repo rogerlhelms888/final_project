@@ -15,8 +15,11 @@
 # # -       Example at 5/1/20:
 # # -       C:\Users\Roger Helms\Documents\GitHub\pratt-savi-810-2020-03-activity_01\maps\CCA_2017-2020_Apr25.xlsx
 # # -       https://acleddata.com/download/18750/
-#
-#
+# # -  Conventions:
+# # -            # # -  for lines of pure annotation, with nothing to run.
+# # -            #      for 'commented' code that could run.
+# # -            <<<    a flag for me to address some hanging issue
+
 import datetime
 import pandas as pd
 import numpy as np
@@ -35,8 +38,6 @@ print(df[['LATITUDE','LONGITUDE']])
 
 # - add an EVENT_COUNT column of 1's to permit summing to day counts or week counts.
 df['EVENT_COUNT'] = 1
-
-
 
 for col in df.columns:
     print(col)
@@ -72,10 +73,12 @@ number_of_rows = len(df.index)
 print('row count after dropping GEO_PRECISION of 3, (default to prov. cap.) : {}.'.format(number_of_rows))
 # The count shows a decrease, so we should be good.
 
-# - add a column to receive a concatination of the LATITUDE and LONGITUDE for later grouping.
-df['COORD_STRING'] = str(df.LATITUDE)+" "+str(df.LONGITUDE)  # <<< not working _____________________
+# - add a column to receive a concatenation of the LATITUDE and LONGITUDE for later grouping.
+df['COORD_STRING'] = str(df.LATITUDE)+" "+str(df.LONGITUDE)  # <<< runs, but the result is strange
+# # so I'm going to punt by grouping on latitude + district name, which is a little goofy and risky <<<<
 
 # print(df[['LATITUDE','LONGITUDE','COORD_STRING']])
+print(" # print(df[['LATITUDE','LONGITUDE','COORD_STRING']])")
 print(df['COORD_STRING'])
 
 # # - Group by coordinates.  (Most events are coded to district centers, which are the same exact lat-longs.)
