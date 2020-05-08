@@ -1,11 +1,14 @@
+# # - This is latest version, on GitHub.  It superceds  file of the same name in a different directory.
+
 # # - Roger Helms' capstone project to automate ACLED reporting TO GRAPH.
 # # -     (There is also a TO MAP script that opens by opening a CSV perpared in the current script.
 # # -     C:\Users\Roger Helms\Documents\GitHub\pratt-savi-810-2020-03-activity_01\maps\ACLED_to_map_DEV.py
-# # - This file's path, working directory and remote Github repo (a/o 5/1/20):
-# # -     C:\Users\Roger Helms\Documents\GitHub\pratt-savi-810-2020-03-activity_01\maps\ACLED_to_graph_DEV.py
-# # -     C:\Users\Roger Helms\Documents\GitHub\pratt-savi-810-2020-03-activity_01\maps
-# # - I upload versions of this file, as I go, to the public Github repository for Danny to check
-# # -     rogerlhelms888/final_project    my Github credentials are in my LastPass
+# # - This file's path:
+# # -     C:\Users\Roger Helms\Documents\GitHub\final_project\ACLED_to_map_DEV.py
+# # - Stored in this remote GitHub repo: https://github.com/rogerlhelms888/final_project
+# # -     My Github credentials are in my LastPass
+# # - Stored in this local Github repo:  C:\Users\Roger Helms\Documents\GitHub\final_project
+# # - The local github path:  C:\Users\Roger Helms\Documents\GitHub\final_project\ACLED_to_graph_DEV.py
 # # - The goal of the project is to automate the creation of bar charts and interactive maps based on a
 # # -     listing of 'confict' events maintained by the aggregator ACLED.
 # # - The data comes as an XLSX table.
@@ -15,7 +18,9 @@
 # # -       Example at 5/1/20:
 # # -       C:\Users\Roger Helms\Documents\GitHub\pratt-savi-810-2020-03-activity_01\maps\CCA_2017-2020_Apr25.xlsx
 # # -       https://acleddata.com/download/18750/
-#
+# # - Output.  This script creates two CSV's:
+# # -       - a CSV of event counts and fatalities by day:           to_AGOL_latest.CSV
+# # -       - a CSV of event counts and fatalities by coordinate:    df_filtered.csv
 #
 import datetime
 import pandas as pd
@@ -236,14 +241,16 @@ print('Here is a print of df_all_days: {}'.format(df_all_days))
 # # - Merge the list of 366 and the 2019 lists.  We need to do this to make sure we have 366 rows in the
 # # - output, even though a couple of days are missing in 2019.  (But I can't get this first merge
 # # - to work, so I'm leaving it commented for now, and will fix later)
-# #     df_2019 = pd.merge(df_all_days, df_2019, on='DAY_OF_YEAR', how='outer') # didn't work <<< !!! Fix later
+df_2019 = pd.merge(df_all_days, df_2019, on='DAY_OF_YEAR', how='outer') # didn't work <<<<<<   !!! Need help.
 
 # # - Merge 2019 and 2020 into a single table using an outer join.
 # # - There may have been one day in 2020 without any events.  None in 2019.
 df_merged = pd.merge(df_2020, df_2019, on='DAY_OF_YEAR', how='outer')
 print(df_merged[['EVENT_DATE_NUM_y', 'EVENT_COUNT_2019', 'FATALITIES_2019', 'EVENT_COUNT_2020', 'FATALITIES_2020']])
-# # - There are only 364 rows (last index was 363).  I am be missing two days that were in neither list.  That
+# # - There are only 364 rows (last index was 363).  I am missing two days that were in neither list.  That
 # # -    problem would be fixed if I could address the problem merging the df_all_days with the df_2019, above.
+
+# #
 
 # # - Write the file to disk.
 # # -    Here is the path: C:\Users\Roger Helms\Documents\GitHub\pratt-savi-810-2020-03-activity_01\maps\to_AGOL.CSV

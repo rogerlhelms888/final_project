@@ -1,5 +1,5 @@
 # # - Roger Helms' capstone project to automate ACLED reporting TO MAP.
-# # -     (There is also a TO GRAPH script that creates a CSV used below.
+# # -     (There is also a TO GRAPH script that creates a CSV used below.)
 # # - This file's path, working directory and remote Github repo (a/o 5/1/20):
 # # -     C:\Users\Roger Helms\Documents\GitHub\final_project\ACLED_to_map_DEV.py
 # # - I should periodically 'push' newer versions of this file uo to the remote Github repository for my final project:
@@ -75,21 +75,36 @@ print('row count after dropping GEO_PRECISION of 3, (default to prov. cap.) : {}
 
 # - add a column to receive a concatenation of the LATITUDE and LONGITUDE for later grouping.
 df['COORD_STRING'] = str(df.LATITUDE)+" "+str(df.LONGITUDE)  # <<< runs, but the result is strange
-# # so I'm going to punt by grouping on latitude + district name, which is a little goofy and risky <<<<
+# # I tried to punt by grouping on latitude + district name, (goofy and risky) but that doesn't work any better.  <<<<
 
 # print(df[['LATITUDE','LONGITUDE','COORD_STRING']])
 print(" # print(df[['LATITUDE','LONGITUDE','COORD_STRING']])")
 print(df['COORD_STRING'])
 
+# # make a simplified string "coordinate" on which to group
+df['COORD_STRING'] = str(df.LATITUDE)
+
 # # - Group by coordinates.  (Most events are coded to district centers, which are the same exact lat-longs.)
 df_by_coord = df.groupby(['COORD_STRING']).sum()
 # print(df_by_coord[['COORD_STRING','FATALITIES','EVENT_COUNT']])
 
-print(df_by_coord.head())
-#  df_by_day = df.groupby(['EVENT_DATE_NUM']).sum() # <<<
+print('df as grouped on COORD_STRING (just latitude as a string for now):')
+# print(df[['LATITUDE','LONGITUDE','COORD_STRING']])
+print(" # print(df_by_coord[['LATITUDE','LONGITUDE','COORD_STRING']])")
+print(df['COORD_STRING'])
 
 
-# for item in df.GEO_PRECISION:
-#     print(item)
 
+
+# # - Group by coordinates.  (Most events are coded to district centers, which are the same exact lat-longs.)
+df_by_coord = df.groupby(['LATITUDE']).sum()
+# print(df_by_coord[['COORD_STRING','FATALITIES','EVENT_COUNT']])
+
+print('df as grouped on LATITUDE (just latitude as a float for now...):')
+# print(df[['LATITUDE','LONGITUDE','COORD_STRING']])
+print(" # print(df_by_coord[['LATITUDE','LONGITUDE','COORD_STRING']])")
+print(df['COORD_STRING'])
+
+df_by_coord = df.groupby(['COORD_STRING']).sum()
+# #  END
 
