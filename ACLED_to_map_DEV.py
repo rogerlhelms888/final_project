@@ -1,14 +1,14 @@
 # # - Roger Helms' capstone project to automate ACLED reporting TO MAP.
 # # -     (There is also a TO GRAPH script that creates a CSV used below.
-# # -      C:\Users\Roger Helms\Documents\GitHub\pratt-savi-810-2020-03-activity_01\maps\ACLED_to_graph_DEV.py).
 # # - This file's path, working directory and remote Github repo (a/o 5/1/20):
-# # -     C:\Users\Roger Helms\Documents\GitHub\pratt-savi-810-2020-03-activity_01\maps\ACLED_to_map_DEV.py
-# # -     C:\Users\Roger Helms\Documents\GitHub\pratt-savi-810-2020-03-activity_01\maps
-# # - I upload versions of this file, as I go, to the public Github repository for Danny to check
+# # -     C:\Users\Roger Helms\Documents\GitHub\final_project\ACLED_to_map_DEV.py
+# # - I should periodically 'push' newer versions of this file uo to the remote Github repository for my final project:
 # # -     rogerlhelms888/final_project    my Github credentials are in my LastPass
 # # - The goal of the project is to automate the creation of bar charts and interactive maps based on a
 # # -     listing of 'confict' events maintained by the aggregator ACLED.
-# # - The data comes as an XLSX table.
+# # - The data comes as an XLSX table which I import in the 'to_graph' script which should be run before this
+# # -     "to map" script.  The to_graph script creates a csv to graph, and another that I import
+# # -     below.  I then work here to create a CSV that groups by coordinates with event counts and total fatalities.
 # # -       Source: 'Curated' page: https://acleddata.com/curated-data-files/
 # # -       URL of the download button at 5/1/20:  https://acleddata.com/download/18750/
 # # -       Interaction.  No clicking or agreement is required, but the file name changes, predictably, each week.
